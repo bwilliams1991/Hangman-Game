@@ -1,24 +1,95 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-	<link rel="stylesheet" href="./assets/css/reset.css">
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Anton|Ubuntu" rel="stylesheet">
+	<!-- font-family: 'Ubuntu', sans-serif;  - body text
+			 font-family: 'Anton', sans-serif;   - callout? 
+	-->
+	<!--  CSS links  -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	 crossorigin="anonymous">
+	<!-- removing reset in favor of bootstrap reset -->
+	<!-- <link rel="stylesheet" href="./assets/css/reset.css"> -->
 	<link rel="stylesheet" href="./assets/css/style.css">
 
+	<!-- Title -->
 	<title>Hangman Game</title>
+	<!-- <img src="./assets/images/Example layout.jpg" alt="placeholder" width="250px"> -->
+
 </head>
+
 <body>
 	<!-- full length header -->
-
+	<header>
+		<div class="layout header">
+			<h1>Final Fantasy</h1>
+		</div>
+		<img src="./assets/fonts/FinalFantasyElements.TTF" alt="">
+	</header>
 	<!-- Container -->
-	<!-- row -->
-	<!-- col -2 nesting -->
-	
+	<div class="container">
+		<!-- row -->
+		<div class="row">
 
+			<div class="col-md-5 col-left doomtrain">
+				<canvas id="doomTrain">
+					Not compatible with your Browser.
+				</canvas>
+
+			</div>
+			<div class="row static-name">
+				<div class="col-md-7 col-right layout help">
+
+					<h3 class="static">HELP</h3>
+
+					<h3 id="messages">Click or type a letter to get Started...</h3>
+
+				</div>
+				<div class="col-md-7 col-right layout name ">
+
+					<h3 class="static">NAME</h3>
+					<span class="written" id="display"></span>
+
+				</div>
+			</div>
+
+
+		</div>
+		<div class="row">
+
+			<div class="col-md-5 col-left layout selector">
+
+				<div class="counters">
+					<span id="hint" class="lower">Hint</span>
+
+					<span>Lives:<span id="numGuesses"></span></span>
+
+					<span>Wins:<span id="winCounter">0</span></span>
+
+					<span>Losses:<span id="lossCounter">0</span></span>
+
+					<!-- <span id="clue"></span> -->
+				</div>
+				
+
+				<div id="incorrect"></div>
+
+			</div>
+			<div class="col-md-7 col-right layout keyboard">
+				<!-- keyboard -->
+				<div class="key-layout" id="keyboard"></div>
+			</div>
+
+		</div>
+	</div>
+	<script src="http://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 	<script src="./assets/javascript/game.js"></script>
 </body>
+
 </html>
