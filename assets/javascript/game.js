@@ -17,26 +17,50 @@ var wins = 0;
 var losses = 0;
 var guessesRemaining = 0;
 
-// 	var messages = {
-// 			start: "Press the Enter key to get Started...",
-// 			hint:  "hintIndex"
-// 	};
+	var messages = {
+			start: "Click or type a letter to get Started...",
+			hint:  "hintIndex",
+			lose: "bummer, man... Try again?",
+			win: "winner!",
+			warning: "Please enter an letter"
+	};
+
+// Gets Link for Theme Song
+ var audioElement = document.createElement("audio");
+ audioElement.setAttribute("src", "assets/sounds/07_Victory_Theme.mp3");
 
 
 // Functions
 // --------------------------------------------------------------------------------------
+//
+	
+
+ 
 
 function startTheGame() {
 	wordHolder = names[Math.floor(Math.random() * names.length)];
 	numOfLetters = wordHolder.split("");
 	numBlank = numOfLetters.length;
 
+	hint.onclick = function () {
+		// find index of current word
+		var hintIndex = names.indexOf(wordHolder);
+
+		// show clue in help section
+		document.getElementById("messages").innerHTML = hints[hintIndex];
+
+	// console.log(hintIndex);
+}
 
 	// resets
 	guessesRemaining = 9;
 	incorrect = [];
 	blanksAndLetters = [];
 
+	// reset to remove active class on letterbtn
+	// letterbtn.classList.remove("active");
+	
+	document.getElementById("messages").innerHTML = messages["start"];
 
 	for (var i = 0; i < numBlank; i++) {
 		blanksAndLetters.push("_");
@@ -52,7 +76,10 @@ function startTheGame() {
 	console.log(blanksAndLetters);
 };
 
+ 
+
 function checkLetter(letter) {
+
 	// if exists
 	var isInWord = false;
 	for (var i = 0; i < numBlank; i++) {
@@ -65,14 +92,19 @@ function checkLetter(letter) {
 		for (var i = 0; i < numBlank; i++) {
 			if(wordHolder[i] == letter) {
 				blanksAndLetters[i] = letter;
+				// add active class to pressed keys
+				// letterBtn.addClass("active");  
 			}
 		}
+	}else if (incorrect.includes(letter)){
+		// empty on purpose...
 	}else {
 		incorrect.push(letter);
 		guessesRemaining--;
 	}
 	// testing
-	console.log(blanksAndLetters);
+	// console.log(blanksAndLetters);
+	// console.log(incorrect);
 }
 
 function roundAndRound() {
@@ -84,22 +116,23 @@ function roundAndRound() {
 
 	/// is winner
 	if(numOfLetters.toString() == blanksAndLetters.toString()) {
+		audioElement.play();
 		wins++;
-		alert("winner!");
-
+		// alert("winner!");
+		document.getElementById("messages").innerHTML = messages["win"];
+		// console.log(messages["win"]);
 		document.getElementById("winCounter").innerHTML = wins;
 
 		startTheGame();
-	}
-	
-	/// is loser
+	}/// is loser
 		else if(guessesRemaining == 0) {
 			losses++;
-			alert("bummer, man... Try again?");
-
+			// alert("bummer, man... Try again?");
+			document.getElementById("messages").innerHTML = messages["lose"];
+			// console.log(messages["lose"]);
 			document.getElementById("lossCounter").innerHTML = losses;
 			
-			animate();
+			
 
 			startTheGame();
 		}
@@ -125,55 +158,53 @@ for (var i = 0; i < alphabet.length; i++) {
 
 // letter buttons 'on-click'
 
-//  option 1
-// $('.letter-button').on("click", function (e) {
-// 	var letterGuessed = String.fromCharCode(e.keyCode).toLowerCase();
-// 	// letterGuessed.text($(this).attr("data-alphabet"));
-// 	checkLetter(letterGuessed);
-// 	roundAndRound();
+$(document).on("click", '.letter-button', function (e) {
+	var letterGuessed = e.target.innerHTML.toLowerCase();
 
-// 	// testing
-// 	console.log(letterGuessed);
-// });
+		checkLetter(letterGuessed);
+		roundAndRound();
 
-// option 2
-// document.onclick = function(e) {
-// 	var letterGuessed = String.fromCharCode(e.keyCode).toLowerCase();
-// 	checkLetter(letterGuessed);
-// 	roundAndRound();
+		// testing
+		console.log(letterGuessed);
+	
 
-// 	// testing
-// 	console.log(letterGuessed);
-// }
+});
 
 // "onKeyUp"
 document.onkeyup = function(e) {
 	var letterGuessed = String.fromCharCode(e.keyCode).toLowerCase();
 
-	checkLetter(letterGuessed);
-	roundAndRound();
-
-	canvas();
-
+if (e.keyCode >= 65 && e.keyCode <= 90) {
+		checkLetter(letterGuessed);
+		roundAndRound();
+}else {
+	document.getElementById("messages").innerHTML = messages["warning"];
+}
 	// testing
 	console.log(letterGuessed);
 }
 
-// // Hint
-	// var getHint = document.getElementById("hint");
 
-	// hint.onclick = function () {
-	// 	var hintIndex = indexOf(names);
-	// 	showClue.innerHTML = hints[hintIndex];
-	// };
 
-	// Animate man
+
+
+
+
+
+
+
+
+
+
+
+/// does not work yet...
+
+	// Animation
 	var animate = function () {
 		var drawMe = guessesRemaining;
 		drawArray[drawMe]();
 	}
 
-	// Hangman
 	canvas = function () {
 
 		myStickman = document.getElementById("doomTrain");
