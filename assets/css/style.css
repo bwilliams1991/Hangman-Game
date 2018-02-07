@@ -1,6 +1,6 @@
 	/* @font-face {
 	font-family: final;
-	src: url(./assets/fonts/FinalFantasy.TTF);
+	src: url(./assets/fonts/FinalFantasy.ttf);
 	} */
 	/* find error with above link */
 
@@ -11,7 +11,7 @@
 	}
 
 	body {
-		/* background: black; */
+		background: black;
 		color: white;
 		font-family: 'Ubuntu', sans-serif;
 		text-shadow: 1px  1px 0 #000;
