@@ -1,4 +1,7 @@
 
+$(document).ready(function () {
+  //your code here
+
 // // Varible Declarations
 // --------------------------------------------------------------------------------------
 var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's','t', 'u', 'v', 'w', 'x', 'y', 'z'];
@@ -268,5 +271,5 @@ if (e.keyCode >= 65 && e.keyCode <= 90) {
 	drawArray = [rightLeg, leftLeg, rightArm, leftArm, torso, head, frame4, frame3, frame2, frame1];
 
 
-
+});
 
